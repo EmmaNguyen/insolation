@@ -58,7 +58,14 @@ def upload():
         })
 
         prediction = np.argmax(y_out, 1)
-        result = '%.2f_%.2f' % (y_out[0][0], y_out[0][1])
+
+        def simple_intepretation(x1, x2):
+            if max(x1, x2) > .95:
+                return "Should check with a demartologist for further consultants."
+            else:
+                return "Have not find any significant potential of risk."
+
+        result = '%s' % simple_intepretation(y_out[0][0], y_out[0][1])
         return result
     return None
 
